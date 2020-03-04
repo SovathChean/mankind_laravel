@@ -14,13 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', function()
+Route::get('/admin', function()
 {
   return view('home');
 });
-Route::get('home/dashboard', function(){
+Route::get('admin/dashboard', function(){
   return view('admin.blogs.index');
 });
-Route::get('home/calendar', function(){
+Route::get('admin/calendar', function(){
   return view('calendar');
 });
+Route::resource('/admin/add_blog', 'BlogsController');

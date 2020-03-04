@@ -56,18 +56,19 @@
             <nav class="iq-sidebar-menu">
                <ul class="iq-menu">
                   <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
-                 {{-- <li class="active">
-                     <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Dashboard</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                 <li class="active">
+                     <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Blogs</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">
-                        <li><a href="index.html">Dashboard 1</a></li>
-                        <li class="active"><a href="dashboard1.html">Dashboard 2</a></li>
-                        <li><a href="analytics.html">Analytics</a></li>
-                        <li><a href="tracking.html">Tracking</a></li>
+                        <li><a href="{{route('add_blog.index') }}">Blogs record</a></li>
+                        {{-- <li class="active"><a href="dashboard1.html">Dashboard 2</a></li> --}}
+                        <li><a href="{{route('add_blog.create')}}">Add blog</a></li>
+                        {{-- <li><a href="{{route('add_blog.show')}}">Edit blog</a></li> --}}
+                        {{-- <li><a href="tracking.html">Tracking</a></li>
                         <li><a href="web-analytics.html">Web Analytics</a></li>
                         <li><a href="patient-dashboard.html">Patient</a></li>
-                        <li><a href="ticket-booking.html">Ticket Booking</a></li>
+                        <li><a href="ticket-booking.html">Ticket Booking</a></li> --}}
                      </ul>
-                  </li> --}}
+                  </li>
                   {{-- <li>
                      <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-mail-line"></i><span>Email</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">
@@ -75,7 +76,7 @@
                         <li><a href="app/email-compose.html">Email Compose</a></li>
                      </ul>
                   </li> --}}
-                  <li><a href='{!! url('/home/calendar'); !!}' class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
+                  <li><a href='{!! url('/admin/calendar'); !!}' class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
                   {{-- <li><a href="#" class="iq-waves-effect"><i class="ri-message-line"></i><span>Chat</span><small class="badge badge-pill badge-primary float-right font-weight-normal ml-auto">Soon</small></a></li>
                   <li><a href="#" class="iq-waves-effect"><i class="ri-shopping-cart-line"></i><span>eCommerce</span><small class="badge badge-pill badge-primary float-right font-weight-normal ml-auto">Soon</small></a></li> --}}
                   {{-- <li class="iq-menu-title"><i class="ri-separator"></i><span>Components</span></li>
