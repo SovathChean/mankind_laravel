@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', function()
+{
+  return view('home');
+});
+Route::get('home/dashboard', function(){
+  return view('admin.blogs.index');
+});
+Route::get('home/calendar', function(){
+  return view('calendar');
+});
