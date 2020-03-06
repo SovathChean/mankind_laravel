@@ -25,3 +25,4 @@ Route::get('admin/calendar', function(){
   return view('calendar');
 });
 Route::resource('/admin/add_blog', 'BlogsController');
+Route::post('/admin/add_blog/image_upload', 'BlogsController@upload')->name('upload');
