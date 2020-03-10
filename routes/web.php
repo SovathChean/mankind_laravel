@@ -24,5 +24,18 @@ Route::get('admin/dashboard', function(){
 Route::get('admin/calendar', function(){
   return view('calendar');
 });
-Route::resource('/admin/add_blog', 'BlogsController');
+
 Route::post('/admin/add_blog/image_upload', 'BlogsController@upload')->name('upload');
+
+Auth::routes();
+
+Route::get('/admin', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']], function() {
+   Route::resource('/admin/add_blog', 'BlogsController');
+   Route::resource('/admin/user', 'UsersController');
+});
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

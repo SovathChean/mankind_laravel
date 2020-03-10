@@ -1,6 +1,6 @@
 @extends('home')
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-@section('content')
+@section('contents')
 
 {!! Form::open(['method'=>'post', 'action'=>'BlogsController@store']) !!}
   <div class="container-fluid">
@@ -34,13 +34,10 @@
                    </div>
               </div>
           </div>
-          <div class="iq-card">
-             <div class="iq-card-body">
-                   {!! Form::submit('submit', ['class'=> 'btn btn-primary']) !!}
-             </div>
-          </div>
       </div>
     </div>
+    {!! Form::submit('Add post', ['class'=>'btn btn-primary']) !!}
   </div>
+
   {!! Form::close() !!}
 @endsection

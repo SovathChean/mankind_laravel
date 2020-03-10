@@ -55,8 +55,16 @@
          <div id="sidebar-scrollbar">
             <nav class="iq-sidebar-menu">
                <ul class="iq-menu">
-                  <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
+                 <li class="iq-menu-title"><i class="ri-separator"></i><span>Users</span></li>
                  <li class="active">
+                     <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Blogs</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul class="iq-submenu">
+                       <li><a href="{{route('user.index') }}">Users record</a></li>
+
+                     </ul>
+                </li>
+                  <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
+                 <li>
                      <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Blogs</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">
                         <li><a href="{{route('add_blog.index') }}">Blogs record</a></li>
@@ -142,19 +150,19 @@
                         <li><a href="icon-remixicon.html">Remixicon</a></li>
                         <li><a href="icon-unicons.html">unicons</a></li>
                      </ul>
-                  </li>
+                  </li>--}}
                   <li class="iq-menu-title"><i class="ri-separator"></i><span>Pages</span></li>
                   <li>
                      <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-pages-line"></i><span>Authentication</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">
                         <li><a href="sign-in.html">Login</a></li>
                         <li><a href="sign-up.html">Register</a></li>
-                        <li><a href="pages-recoverpw.html">Recover Password</a></li>
+                        {{-- <li><a href="pages-recoverpw.html">Recover Password</a></li>
                         <li><a href="pages-confirm-mail.html">Confirm Mail</a></li>
-                        <li><a href="pages-lock-screen.html">Lock Screen</a></li>
+                        <li><a href="pages-lock-screen.html">Lock Screen</a></li> --}}
                      </ul>
                   </li>
-                  <li>
+                  {{-- <li>
                      <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-map-pin-user-line"></i><span>Maps</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">
                         <li><a href="pages-map.html">Google Map</a></li>
@@ -405,7 +413,10 @@
                                     </div>
                                  </a>
                                  <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="iq-bg-danger iq-sign-btn" href="sign-in.html" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+
+                                         <a class="iq-bg-danger iq-sign-btn" href="{{url('logout')}}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+
+
                                  </div>
                               </div>
                            </div>
@@ -541,7 +552,7 @@
       </div>
       <!-- Right Sidebar Panel End-->
       <div id="content-page" class="content-page">
-         @yield('content');
+         @yield('contents');
       </div>
    </div>
       <!-- Wrapper END -->
