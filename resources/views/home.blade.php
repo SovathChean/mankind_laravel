@@ -64,6 +64,7 @@
                      </ul>
                 </li>
                   <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
+                @role('doctor|Admin')
                  <li>
                      <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Blogs</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">
@@ -77,6 +78,16 @@
                         <li><a href="ticket-booking.html">Ticket Booking</a></li> --}}
                      </ul>
                   </li>
+                  @endrole
+                  @role('Admin')
+                  <li class="iq-menu-title"><i class="ri-separator"></i><span>Install role</span></li>
+                  <li>
+                      <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Role</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                      <ul class="iq-submenu">
+                            <li><a href="{{route('create_role.index')}}">Create role</a></li>
+                      </ul>
+                 </li>
+                 @endrole
                   {{-- <li>
                      <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-mail-line"></i><span>Email</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">

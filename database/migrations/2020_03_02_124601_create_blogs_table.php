@@ -18,7 +18,7 @@ class CreateBlogsTable extends Migration
             $table->integer('ht_id')->unsigned();
             $table->string('title');
             $table->text('body');
-            $table->integer('photo_id')->unsigned();
+
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 

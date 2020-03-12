@@ -20,7 +20,7 @@ class CreateDoctorsTable extends Migration
             $table->string('email')->unique();
             $table->string('fb_url')->unique();
             $table->string('insta_url')->unique();
-            $table->integer('photo_id')->unsigned();
+
             $table->text('description');
             $table->timestamps();
 

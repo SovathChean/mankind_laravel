@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
-class UsersController extends Controller
+class CreateRoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +16,9 @@ class UsersController extends Controller
     public function index()
     {
         //
-        $auth = Auth::id();
-        $users = DB::table('users')->get();
-        $roles = DB::table('roles')->pluck('name', 'id')->all();
-        $roleModels = DB::table('model_has_roles')->pluck('role_id', 'model_id')->all();
-
-        //return $roleModels[2];
-      return view('admin.users.index', ['users'=> $users, 'roles'=> $roles, 'auth'=>$auth, 'roleModels'=>$roleModels]);
+        return view('admin.role_and_permission.index');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -46,15 +39,28 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->input();
+
+        $roles = Role::create(['name' => $input['role']]);
+
+        foreach($input['permission'] as $a)
+        {
+          $permission = Permission::where('id', $a)->pluck('id', 'id')->all();
+          $role = Role::findOrFail($roles->id);
+          $role->givePermissionTo($permission);
+
+        }
+
+      return view('home');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
         //
     }
@@ -62,10 +68,10 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         //
     }
@@ -74,10 +80,10 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -85,10 +91,10 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
         //
     }

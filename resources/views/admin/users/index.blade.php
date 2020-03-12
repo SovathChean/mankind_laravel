@@ -18,37 +18,62 @@
                       <th>name</th>
                       <th>email</th>
                       <th>created_at</th>
-                      <th>Add role</th>
+                      <th>role</th>
+                      @role('Admin')
+                      <th>Assigned role</th>
+                      @endrole
+                      @role('doctor|Admin')
                       <th></th>
                       <th></th>
+                      @endrole
                     </tr>
                     </thead>
                     <tbody>
                       @foreach($users as $user)
+
                         <tr>
                           <td>{{$user->id}}</td>
                           <td>{{$user->name}}</td>
                           <td>{{$user->email}}</td>
                           <td>{{$user->created_at}}</td>
+                          <td>{{$roles[$roleModels[$user->id]]}}</td>
+                          @role('Admin')
                           <td>
-                            <div class="form-group">
-                              <button href="" class="btn btn-success">Add role</button>
-                            </div>
+                            {!! Form::open(['method'=>'POST', 'action'=>['RoleController@store']]) !!}
+
+                              <div class="form-group">
+                                 {!! Form::select('role', [''=>'choose role'] + $roles, null, ['class'=>'form-control', 'onchange'=>'this.form.submit()', 'value'=> '$roles->id']) !!}
+
+                              </div>
+                              <noscript><input type="submit" value="Submit"></noscript>
+
+                            {!! Form::close() !!}
+
                         </td>
+                        @endrole
+
+                        @can('edit post')
                           <td>
+
                               {!! Form::open(['method'=>'GET', 'action'=>['UsersController@edit', $user->id] ]) !!}
                               <div class="form-group">
                                 {!! Form::submit('update', ['class'=>'btn btn-primary']) !!}
                               </div>
                               {!! Form::close() !!}
+
                           </td>
+                            @endcan
+                            @can('delete post')
                           <td>
+
                               {!! Form::open(['method'=>'delete', 'action'=>['UsersController@destroy', $user->id] ]) !!}
                               <div class="form-group">
                                 {!! Form::submit('delete', ['class'=>'btn btn-danger']) !!}
                               </div>
                               {!! Form::close() !!}
+
                           </td>
+                        @endcan
                         </tr>
                       @endforeach
                     </tbody>

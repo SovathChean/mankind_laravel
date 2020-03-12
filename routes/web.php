@@ -21,11 +21,9 @@ Route::get('/admin', function()
 Route::get('admin/dashboard', function(){
   return view('admin.blogs.index');
 });
-Route::get('admin/calendar', function(){
-  return view('calendar');
-});
 
-Route::post('/admin/add_blog/image_upload', 'BlogsController@upload')->name('upload');
+
+
 
 Auth::routes();
 
@@ -35,7 +33,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function() {
-   Route::resource('/admin/add_blog', 'BlogsController');
+  Route::group(['middleware'=>['permission:write post']], function(){
+     Route::resource('/admin/add_blog', 'BlogsController');
+     Route::post('/admin/add_blog/image_upload', 'BlogsController@upload')->name('upload');
+  });
+  Route::group(['middleware' => ['role:Admin']], function(){
+     Route::resource('/admin/create_role', 'CreateRoleController');
+  });
    Route::resource('/admin/user', 'UsersController');
+   Route::resource('/admin/add_role', 'RoleController');
+   Route::get('admin/calendar', function(){
+     return view('calendar');
+   });
 });
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
