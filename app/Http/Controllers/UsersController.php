@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\model_has_roles;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,10 +23,11 @@ class UsersController extends Controller
         $users = DB::table('users')->get();
         $roles = DB::table('roles')->pluck('name', 'id')->all();
         $roleModels = DB::table('model_has_roles')->pluck('role_id', 'model_id')->all();
+        $lastModel  = model_has_roles::max('model_id');
 
-        //return $roleModels[2];
-      return view('admin.users.index', ['users'=> $users, 'roles'=> $roles, 'auth'=>$auth, 'roleModels'=>$roleModels]);
-    }
+        return view('admin.users.index', ['users'=> $users, 'roles'=> $roles, 'auth'=>$auth, 'roleModels'=>$roleModels, 'lastModel'=>$lastModel]);
+    //
+  }
 
     /**
      * Show the form for creating a new resource.
@@ -35,6 +37,9 @@ class UsersController extends Controller
     public function create()
     {
         //
+        $roles = DB::table('roles')->pluck('name', 'id')->all();
+
+        return view('admin.users.create', ['roles'=>$roles]);
     }
 
     /**
@@ -46,6 +51,12 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $password = bcrypt($input['password']);
+        User::create(['name'=>$input['name'], 'email'=>$input['email'], 'password'=>$password]);
+
+
+        return view('home');
     }
 
     /**
@@ -68,6 +79,9 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         //
+        $user = User::findOrFail($user->id);
+
+        return view('admin.users.edit', ['user'=>$user]);
     }
 
     /**
@@ -80,6 +94,12 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        $input = $request->all();
+        $password = bcrypt($input['password']);
+        $user = User::findOrFail($user->id);
+        $user->update(['name'=>$input['name'], 'email'=>$input['email'], 'password'=>$password]);
+
+        return redirect('/admin/user');
     }
 
     /**
@@ -91,5 +111,9 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         //
+        $user = User::findOrFail($user->id);
+        $user->delete();
+
+        return view('home');
     }
 }

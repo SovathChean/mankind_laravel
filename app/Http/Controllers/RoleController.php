@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\user;
+use App\model_has_roles;
+use App\model_has_permissions;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,28 +42,26 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //assignRole
-        $user = Auth::user();
+
         $input = $request->all();
-        $modelRole = DB::table('model_has_roles')->where('model_id', Auth::id())->value('role_id');
-        $role = DB::table('roles')->where('id', $modelRole)->value('name');
-        $user->removeRole($role);
-        $user->assignRole($input['role']);
-        //assignPermission
+        $user = User::where('id', $input['user_id'])->get();
+        $role_id = $input['role'];
+        $role = model_has_roles::where('model_id',  $input['user_id'])->delete();
+        model_has_roles::create(['role_id'=>$role_id, 'model_type'=>'App\User', 'model_id'=>$input['user_id']]);
+
+        // assignPermission
         $role_has_permission = DB::table('role_has_permissions')->where('role_id', $input['role'])->pluck('permission_id')->all();
-        $modelP = DB::table('model_has_permissions')->where('model_id', Auth::id())->pluck('permission_id')->all();
         $permission = DB::table('permissions')->pluck('name', 'id')->all();
-        foreach($modelP as $si)
-        {
-          $user->revokePermissionTo([$permission[$si]]);
-        }
+        model_has_permissions::where('model_id', $input['user_id'])->delete();
+
         foreach($role_has_permission as $s)
         {
-           $user->givePermissionTo([$permission[$s]]);
+          model_has_permissions::create(['permission_id'=>$s, 'model_type'=>'App\User', 'model_id'=>$input['user_id']]);
         }
 
-        //$user->givePermissionTo([])
 
-       return view('home');
+
+      return view('home');
 
     }
     /**

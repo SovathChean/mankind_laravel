@@ -1,5 +1,9 @@
 @extends('home')
-
+<style media="screen">
+  .user{
+  margin-bottom: 20px;
+  }
+</style>
 @section('contents')
  <div class="container-fluid">
     <div class="row">
@@ -10,6 +14,9 @@
            </div>
         </div>
         <div class="iq-card-body">
+          @role('Admin')
+          <button class="btn btn-success user" ><a href="{{route('user.create')}}"> Create New User </a> </button>
+          @endrole
             <div class="table-responsive">
                   <table id="datatable" class="table table-striped table-bordered" >
                     <thead>
@@ -29,21 +36,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                      @foreach($users as $user)
+                       @foreach($users as $user)
 
                         <tr>
                           <td>{{$user->id}}</td>
                           <td>{{$user->name}}</td>
                           <td>{{$user->email}}</td>
                           <td>{{$user->created_at}}</td>
+                          @if($user->id <= $lastModel)
                           <td>{{$roles[$roleModels[$user->id]]}}</td>
+                          @else
+                          <td>non</td>
+                          @endif
+
+
                           @role('Admin')
                           <td>
                             {!! Form::open(['method'=>'POST', 'action'=>['RoleController@store']]) !!}
 
                               <div class="form-group">
                                  {!! Form::select('role', [''=>'choose role'] + $roles, null, ['class'=>'form-control', 'onchange'=>'this.form.submit()', 'value'=> '$roles->id']) !!}
-
+                                 <input type="hidden" name="user_id" value="{{$user->id}}">
                               </div>
                               <noscript><input type="submit" value="Submit"></noscript>
 

@@ -57,10 +57,10 @@
                <ul class="iq-menu">
                  <li class="iq-menu-title"><i class="ri-separator"></i><span>Users</span></li>
                  <li class="active">
-                     <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Blogs</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Users</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">
                        <li><a href="{{route('user.index') }}">Users record</a></li>
-
+                       <li><a href="{{route('user.create') }}">Create User</a></li>
                      </ul>
                 </li>
                   <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
@@ -77,6 +77,12 @@
                         <li><a href="patient-dashboard.html">Patient</a></li>
                         <li><a href="ticket-booking.html">Ticket Booking</a></li> --}}
                      </ul>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Health topic</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul class="iq-submenu">
+                      <li><a href="{{route('health_topic.index') }}">Topic</a></li>
+                    </ul>
                   </li>
                   @endrole
                   @role('Admin')

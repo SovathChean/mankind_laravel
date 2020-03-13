@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function() {
   });
   Route::group(['middleware' => ['role:Admin']], function(){
      Route::resource('/admin/create_role', 'CreateRoleController');
+     Route::resource('/admin/health_topic', 'HealthTopicController');
   });
    Route::resource('/admin/user', 'UsersController');
    Route::resource('/admin/add_role', 'RoleController');
