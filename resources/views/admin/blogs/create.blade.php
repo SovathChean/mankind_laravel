@@ -10,10 +10,10 @@
           <div class="iq-card-body">
                <div class="form-group">
                  {!! Form::label('body', 'Blog body') !!}
-                  <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+                  <textarea class="form-control" id="summary-ckeditor" name="body"></textarea>
                   <script>
                       CKEDITOR.replace( 'summary-ckeditor', {
-                          filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+                          filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token()])}}",
                           filebrowserUploadMethod: 'form'
                       });
                   </script>
@@ -30,7 +30,7 @@
                   </div>
                    <div class="form-group">
                       {!! Form::label('ht_id', 'Blogs categories') !!}
-                      {!! Form::select('ht_id', ['1'=>'food', '2'=>'nutrition'], null, ['class'=>'form-control']) !!}
+                      {!! Form::select('ht_id', [' '=>'choose topic'] + $healths, null, ['class'=>'form-control', 'value'=>'$healths->id']) !!}
                    </div>
               </div>
           </div>

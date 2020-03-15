@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
+use App\Health_topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BlogsController extends Controller
 {
@@ -15,7 +18,8 @@ class BlogsController extends Controller
     public function index()
     {
         //
-        return view('admin.blogs.index');
+        $blogs = Blog::all();
+        return view('admin.blogs.index', ['blogs'=>$blogs]);
     }
 
     /**
@@ -26,7 +30,8 @@ class BlogsController extends Controller
     public function create()
     {
         //
-        return view('admin.blogs.create');
+        $healths = Health_topic::pluck('topic', 'id')->all();
+        return view('admin.blogs.create', ['healths'=>$healths]);
     }
 
     /**
@@ -38,7 +43,13 @@ class BlogsController extends Controller
     public function store(Request $request)
     {
         //
-         return $request;
+          $input = $request->all();
+
+          Blog::create([ 'ht_id'=>$input['ht_id'], 'title'=>$input['title'], 'body'=>$input['body'], 'user_id'=>Auth::id() ]);
+
+          $blogs = Blog::all();
+          return view('admin.blogs.index', ['blogs'=>$blogs]);
+
     }
 
     /**
@@ -61,6 +72,9 @@ class BlogsController extends Controller
     public function edit($id)
     {
         //
+        $blogs = Blog::findOrFail($id);
+        $healths = Health_topic::pluck('topic', 'id')->all();
+        return view('admin.blogs.edit', ['blogs'=>$blogs, 'healths'=>$healths]);
     }
 
     /**
@@ -73,6 +87,12 @@ class BlogsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $input = $request->all();
+        $update_blog = Blog::findOrFail($id);
+        $update_blog->update([ 'ht_id'=>$input['ht_id'], 'title'=>$input['title'], 'body'=>$input['body'], 'user_id'=>Auth::id() ]);
+
+        $blogs = Blog::all();
+        return view('admin.blogs.index', ['blogs'=>$blogs]);
     }
 
     /**
@@ -84,13 +104,18 @@ class BlogsController extends Controller
     public function destroy($id)
     {
         //
+        $blog = Blog::findOrFail($id);
+        $blog->delete();
+
+        $blogs = Blog::all();
+        return view('admin.blogs.index', ['blogs'=>$blogs]);
     }
     public function upload(Request $request)
    {
        if($request->hasFile('upload')) {
            //get filename with extension
            $filenamewithextension = $request->file('upload')->getClientOriginalName();
-
+           //
            //get filename without extension
            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
 
@@ -103,6 +128,7 @@ class BlogsController extends Controller
            //Upload File
            $request->file('upload')->storeAs('public/uploads', $filenametostore);
 
+           // Photo::create(['url'=>$filenametostore, 'post-id'=>'1', 'pt_id'=>'1']);
            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
            $url = asset('storage/uploads/'.$filenametostore);
            $msg = 'Image successfully uploaded';
@@ -111,6 +137,7 @@ class BlogsController extends Controller
            // Render HTML output
            @header('Content-type: text/html; charset=utf-8');
            echo $re;
+
        }
    }
 }

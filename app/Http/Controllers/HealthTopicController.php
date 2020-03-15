@@ -6,6 +6,7 @@ use App\Health_topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class HealthTopicController extends Controller
 {
     /**
@@ -29,6 +30,7 @@ class HealthTopicController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -40,6 +42,11 @@ class HealthTopicController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        Health_topic::create($input);
+        $health_topics = DB::table('Health_topics')->get();
+
+        return view('admin.health_topic.index', ['health_topics'=>$health_topics]);
     }
 
     /**
@@ -62,6 +69,9 @@ class HealthTopicController extends Controller
     public function edit(Health_topic $health_topic)
     {
         //
+        $topic = Health_topic::findOrFail($health_topic->id);
+
+        return view('admin.health_topic.edit', ['topic'=>$topic]);
     }
 
     /**
@@ -74,6 +84,13 @@ class HealthTopicController extends Controller
     public function update(Request $request, Health_topic $health_topic)
     {
         //
+        $input = $request->all();
+        $topic = Health_topic::findOrFail($health_topic->id);
+        $topic->update($input);
+        $health_topics = DB::table('Health_topics')->get();
+
+        return view('admin.health_topic.index', ['health_topics'=>$health_topics]);
+
     }
 
     /**
@@ -85,5 +102,11 @@ class HealthTopicController extends Controller
     public function destroy(Health_topic $health_topic)
     {
         //
+        $health = Health_topic::findOrFail($health_topic->id);
+        $health->delete();
+        $health_topics = DB::table('Health_topics')->get();
+
+        return view('admin.health_topic.index', ['health_topics'=>$health_topics]);
+
     }
 }

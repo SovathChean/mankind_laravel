@@ -3,7 +3,12 @@
   .user{
   margin-bottom: 20px;
   }
+  .user a:hover {
+    text-decoration: none;
+  }
 </style>
+<!-- Datatable -->
+
 @section('contents')
  <div class="container-fluid">
     <div class="row">
@@ -13,6 +18,7 @@
               <h4 class="card-title">Blogs Datatables</h4>
            </div>
         </div>
+       <div class="iq-card">
         <div class="iq-card-body">
           @role('Admin')
           <button class="btn btn-success user" ><a href="{{route('user.create')}}"> Create New User </a> </button>
@@ -25,17 +31,19 @@
                       <th>name</th>
                       <th>email</th>
                       <th>created_at</th>
-                      <th>role</th>
+                      
+                      {{-- <th>role</th>
                       @role('Admin')
                       <th>Assigned role</th>
                       @endrole
                       @role('doctor|Admin')
                       <th></th>
                       <th></th>
-                      @endrole
+                      @endrole --}}
+
                     </tr>
                     </thead>
-                    <tbody>
+                    {{-- <tbody>
                        @foreach($users as $user)
 
                         <tr>
@@ -89,11 +97,30 @@
                         @endcan
                         </tr>
                       @endforeach
-                    </tbody>
+                    </tbody> --}}
+
                   </table>
+                </div>
             </div>
         </div>
       </div>
     </div>
  </div>
 @endsection
+@push('scripts')
+<script>
+$(function() {
+    $('#datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{route('get.users')}}',
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'name', name: 'name' },
+            { data: 'email', name: 'email' },
+            { data: 'created_at', name: 'created_at' }
+        ]
+    });
+});
+</script>
+@endpush

@@ -40,11 +40,13 @@ Route::group(['middleware' => ['auth']], function() {
   Route::group(['middleware' => ['role:Admin']], function(){
      Route::resource('/admin/create_role', 'CreateRoleController');
      Route::resource('/admin/health_topic', 'HealthTopicController');
+     Route::resource('/admin/department', 'DepartmentController');
   });
    Route::resource('/admin/user', 'UsersController');
    Route::resource('/admin/add_role', 'RoleController');
    Route::get('admin/calendar', function(){
      return view('calendar');
    });
+   Route::get('user', 'UsersController@datatable')->name('get.users');
 });
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

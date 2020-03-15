@@ -15,6 +15,8 @@
       <link rel="stylesheet" href="{{asset('css/style.css')}}">
       <!-- Responsive CSS -->
       <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+      <!-- Datatable -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
    </head>
    <body>
       <!-- loader Start -->
@@ -82,6 +84,16 @@
                     <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Health topic</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul class="iq-submenu">
                       <li><a href="{{route('health_topic.index') }}">Topic</a></li>
+
+                    </ul>
+                  </li>
+                  @endrole
+                  @role('Admin')
+                  <li>
+                    <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Department</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul class="iq-submenu">
+                      <li><a href="{{route('department.index') }}">Department</a></li>
+
                     </ul>
                   </li>
                   @endrole
@@ -592,6 +604,9 @@
       <!-- Footer END -->
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+      </script>
       <script src="{{asset('js/jquery.min.js')}}"></script>
       <script src="{{asset('js/popper.min.js')}}"></script>
       <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -622,5 +637,18 @@
       <script src="{{asset('js/chart-custom.js') }}"></script>
       <!-- Custom JavaScript -->
       <script src="{{asset('js/custom.js') }}"></script>
+
+
+      {{-- Datatable --}}
+      <!-- jQuery -->
+       <script
+          src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous">
+      </script>
+       <!-- DataTables -->
+       <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
+    @stack('scripts')
    </body>
 </html>

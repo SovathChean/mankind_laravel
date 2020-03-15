@@ -8,6 +8,8 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Yajra\Datatables\Datatables;
+
 
 class UsersController extends Controller
 {
@@ -19,14 +21,16 @@ class UsersController extends Controller
     public function index()
     {
         //
-        $auth = Auth::id();
-        $users = DB::table('users')->get();
-        $roles = DB::table('roles')->pluck('name', 'id')->all();
-        $roleModels = DB::table('model_has_roles')->pluck('role_id', 'model_id')->all();
-        $lastModel  = model_has_roles::max('model_id');
-
-        return view('admin.users.index', ['users'=> $users, 'roles'=> $roles, 'auth'=>$auth, 'roleModels'=>$roleModels, 'lastModel'=>$lastModel]);
+        // $auth = Auth::id();
+        // $users = DB::table('users')->get();
+        // $roles = DB::table('roles')->pluck('name', 'id')->all();
+        // $roleModels = DB::table('model_has_roles')->pluck('role_id', 'model_id')->all();
+        // $lastModel  = model_has_roles::max('model_id');
+        //
+        // return view('admin.users.index', ['users'=> $users, 'roles'=> $roles, 'auth'=>$auth, 'roleModels'=>$roleModels, 'lastModel'=>$lastModel]);
     //
+    return view('admin.users.index');
+
   }
 
     /**
@@ -115,5 +119,9 @@ class UsersController extends Controller
         $user->delete();
 
         return view('home');
+    }
+    public function datatable()
+    {
+        return Datatables::of(User::query())->make(true);
     }
 }

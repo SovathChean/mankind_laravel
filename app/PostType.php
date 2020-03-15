@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Photo extends Model
+class PostType extends Model
 {
     //
     protected $fillable = [
-      'url', 'blog_id', 'new_id',
+      'name',
     ];
 }
