@@ -17,6 +17,11 @@
       <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
       <!-- Datatable -->
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+      {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.4/css/select.bootstrap.min.css"> --}}
+
    </head>
    <body>
       <!-- loader Start -->
@@ -649,6 +654,17 @@
        <!-- DataTables -->
        <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
+             {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+             <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+             <script src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
+             <script src="https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js"></script>
+             <script src="{{asset('/js/dataTables.editor.js')}}"></script>
+
+             <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+             <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
+
+             <script src="{{asset('/js/editor.bootstrap.min.js')}}"></script> --}}
     @stack('scripts')
    </body>
 </html>

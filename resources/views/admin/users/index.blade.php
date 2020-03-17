@@ -25,13 +25,18 @@
           @endrole
             <div class="table-responsive">
                   <table id="datatable" class="table table-striped table-bordered" >
-                    <thead>
+                     <thead>
                       <tr>
                       <th>id</th>
                       <th>name</th>
+                      <th>role</th>
                       <th>email</th>
                       <th>created_at</th>
-                      
+                      @role('Admin')
+                      <th>Assigned_role</th>
+                      <th>update</th>
+                      <th>intro</th>
+                      @endrole
                       {{-- <th>role</th>
                       @role('Admin')
                       <th>Assigned role</th>
@@ -41,8 +46,7 @@
                       <th></th>
                       @endrole --}}
 
-                    </tr>
-                    </thead>
+                      </thead>
                     {{-- <tbody>
                        @foreach($users as $user)
 
@@ -117,10 +121,19 @@ $(function() {
         columns: [
             { data: 'id', name: 'id' },
             { data: 'name', name: 'name' },
+            { data: 'role', name: 'role'},
             { data: 'email', name: 'email' },
-            { data: 'created_at', name: 'created_at' }
+            { data: 'created_at', name: 'created_at' },
+            @role('Admin')
+            { data: 'select_role', name: 'select_role'},
+            { data: 'update', name: 'update',  orderable: false, searchable: false },
+            { data: 'action', name: 'action'},
+            @endrole
+
+
         ]
     });
+
 });
 </script>
 @endpush

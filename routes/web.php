@@ -43,7 +43,9 @@ Route::group(['middleware' => ['auth']], function() {
      Route::resource('/admin/department', 'DepartmentController');
   });
    Route::resource('/admin/user', 'UsersController');
+   Route::get('/admin/user/delete/{id}', 'UsersController@destroy');
    Route::resource('/admin/add_role', 'RoleController');
+   Route::get('/admin/add_role/add/{id}', 'RoleController@addRole');
    Route::get('admin/calendar', function(){
      return view('calendar');
    });

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\User;
+
 use App\model_has_roles;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
-
+use App\DataTables\UserDataTable;
+use App\DataTables\UserDataTableEditor;
 
 class UsersController extends Controller
 {
@@ -20,18 +22,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
-        // $auth = Auth::id();
-        // $users = DB::table('users')->get();
-        // $roles = DB::table('roles')->pluck('name', 'id')->all();
-        // $roleModels = DB::table('model_has_roles')->pluck('role_id', 'model_id')->all();
-        // $lastModel  = model_has_roles::max('model_id');
-        //
-        // return view('admin.users.index', ['users'=> $users, 'roles'=> $roles, 'auth'=>$auth, 'roleModels'=>$roleModels, 'lastModel'=>$lastModel]);
-    //
-    return view('admin.users.index');
-
-  }
+      
+      return view('admin.users.index');
+     }
 
     /**
      * Show the form for creating a new resource.
@@ -58,7 +51,6 @@ class UsersController extends Controller
         $input = $request->all();
         $password = bcrypt($input['password']);
         User::create(['name'=>$input['name'], 'email'=>$input['email'], 'password'=>$password]);
-
 
         return view('home');
     }
@@ -112,16 +104,53 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
         //
-        $user = User::findOrFail($user->id);
+        $user = User::findOrFail($id);
         $user->delete();
 
-        return view('home');
+        return redirect('/admin/user');
+
     }
     public function datatable()
     {
-        return Datatables::of(User::query())->make(true);
+        return Datatables::of(User::query())
+        ->addColumn('role', function(User $user) {
+                   if(!is_null($user->role_id))
+                    {
+                      return $user->role->name;}
+                    else {
+                      return 'Not yet';
+                    }
+                })
+        ->addColumn('update', function(User $user){
+              $update =  '<a href="/admin/user/'.$user->id.'/edit" class="btn btn-primary btn-sm">Update</a>';
+
+                 return $update;
+        })
+        ->addColumn('action', function(User $user){
+          $action = <<<HTML
+                     <form action="/admin/user/delete/$user->id" method="get">
+                      <input type="submit" class="btn btn-danger btn-sm" value="delete">
+                    </form>
+
+                    HTML;
+             return $action;
+        })
+        ->addColumn('select_role', function(User $user){
+          $roles = Role::all();
+
+          $select = <<<HTML
+                      <a href="/admin/add_role/add/$user->id" class="btn btn-secondary btn-sm">Add Role </a>
+                     HTML;
+
+          return $select;
+        })
+        ->rawColumns(['update', 'action', 'select_role'])
+
+        ->make(true);
     }
+
+
 }

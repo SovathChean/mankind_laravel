@@ -21,6 +21,8 @@ class RoleController extends Controller
     public function index()
     {
         //
+
+
     }
 
     /**
@@ -53,12 +55,17 @@ class RoleController extends Controller
         $role_has_permission = DB::table('role_has_permissions')->where('role_id', $input['role'])->pluck('permission_id')->all();
         $permission = DB::table('permissions')->pluck('name', 'id')->all();
         model_has_permissions::where('model_id', $input['user_id'])->delete();
-
+        //changeRole_idInUserTable
+        $user = User::findOrFail($input['user_id']);
+        if($user)
+        {
+          $user->role_id = $role_id;
+          $user->save();
+        }
         foreach($role_has_permission as $s)
         {
           model_has_permissions::create(['permission_id'=>$s, 'model_type'=>'App\User', 'model_id'=>$input['user_id']]);
         }
-
 
 
       return view('home');
@@ -73,6 +80,15 @@ class RoleController extends Controller
     public function show(Role $role)
     {
         //
+    }
+    public function addRole($id)
+    {
+        $roles = DB::table('roles')->pluck('name', 'id')->all();
+        $user_id = $id;
+
+        return view('admin.role.index', ['roles'=>$roles, 'user_id'=>$id]);
+
+
     }
 
     /**
