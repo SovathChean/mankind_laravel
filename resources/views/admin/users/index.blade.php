@@ -37,72 +37,7 @@
                       <th>update</th>
                       <th>intro</th>
                       @endrole
-                      {{-- <th>role</th>
-                      @role('Admin')
-                      <th>Assigned role</th>
-                      @endrole
-                      @role('doctor|Admin')
-                      <th></th>
-                      <th></th>
-                      @endrole --}}
-
                       </thead>
-                    {{-- <tbody>
-                       @foreach($users as $user)
-
-                        <tr>
-                          <td>{{$user->id}}</td>
-                          <td>{{$user->name}}</td>
-                          <td>{{$user->email}}</td>
-                          <td>{{$user->created_at}}</td>
-                          @if($user->id <= $lastModel)
-                          <td>{{$roles[$roleModels[$user->id]]}}</td>
-                          @else
-                          <td>non</td>
-                          @endif
-
-
-                          @role('Admin')
-                          <td>
-                            {!! Form::open(['method'=>'POST', 'action'=>['RoleController@store']]) !!}
-
-                              <div class="form-group">
-                                 {!! Form::select('role', [''=>'choose role'] + $roles, null, ['class'=>'form-control', 'onchange'=>'this.form.submit()', 'value'=> '$roles->id']) !!}
-                                 <input type="hidden" name="user_id" value="{{$user->id}}">
-                              </div>
-                              <noscript><input type="submit" value="Submit"></noscript>
-
-                            {!! Form::close() !!}
-
-                        </td>
-                        @endrole
-
-                        @can('edit post')
-                          <td>
-
-                              {!! Form::open(['method'=>'GET', 'action'=>['UsersController@edit', $user->id] ]) !!}
-                              <div class="form-group">
-                                {!! Form::submit('update', ['class'=>'btn btn-primary']) !!}
-                              </div>
-                              {!! Form::close() !!}
-
-                          </td>
-                            @endcan
-                            @can('delete post')
-                          <td>
-
-                              {!! Form::open(['method'=>'delete', 'action'=>['UsersController@destroy', $user->id] ]) !!}
-                              <div class="form-group">
-                                {!! Form::submit('delete', ['class'=>'btn btn-danger']) !!}
-                              </div>
-                              {!! Form::close() !!}
-
-                          </td>
-                        @endcan
-                        </tr>
-                      @endforeach
-                    </tbody> --}}
-
                   </table>
                 </div>
             </div>
@@ -129,8 +64,6 @@ $(function() {
             { data: 'update', name: 'update',  orderable: false, searchable: false },
             { data: 'action', name: 'action'},
             @endrole
-
-
         ]
     });
 

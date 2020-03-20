@@ -8,6 +8,17 @@ class Photo extends Model
 {
     //
     protected $fillable = [
-      'url', 'blog_id', 'new_id',
+      'url', 'user_id',
     ];
+    protected $uploads = '/public/image/';
+
+
+
+    public function getFileAttribute($photo)
+    {
+      return $this->uploads.$photo;
+    }
+    public function user(){
+      return $this->hasMany('App\User', 'user_id');
+    }
 }

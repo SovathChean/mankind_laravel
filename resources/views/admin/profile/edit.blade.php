@@ -12,7 +12,7 @@
            </div>
         </div>
         <div class="iq-card-body">
-             {!! Form::open(['method'=>'POST', 'action'=>'UsersController@store', 'files'=>true]) !!}
+             {!! Form::model($user, ['method'=>'POST', 'action'=>['UsersController@update', $user], 'files'=>true]) !!}
                 @include('admin.profile.form')
               {!! Form::close() !!}
         </div>

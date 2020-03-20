@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Photo;
+use App\Profile;
 use App\User;
+use App\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class PhotoController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +19,10 @@ class PhotoController extends Controller
     public function index()
     {
         //
+        $auth = Auth::id();
+        $user = User::findOrFail($auth);
+        $photo = Photo::findOrFail($auth)->orderBy('created_at', 'DESC')->first();
+        return view('admin.profile.index', ['user'=>$user, 'photo'=>$photo]);
     }
 
     /**
@@ -38,16 +44,15 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         //
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Photo  $photo
+     * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Photo $photo)
+    public function show(Profile $profile)
     {
         //
     }
@@ -55,22 +60,23 @@ class PhotoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Photo  $photo
+     * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Photo $photo)
+    public function edit(Profile $profile)
     {
         //
+      
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Photo  $photo
+     * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Photo $photo)
+    public function update(Request $request, Profile $profile)
     {
         //
     }
@@ -78,39 +84,11 @@ class PhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Photo  $photo
+     * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Photo $photo)
+    public function destroy(Profile $profile)
     {
         //
-    }
-
-    public function ajaxstore(Request $request)
-    {
-      $auth = Auth::id();
-      if($request->hasFile('file')) {
-
-          Photo::create(['url'=>'hello', 'user_id'=>3]);
-          //get filename with extension
-          $filenamewithextension = $request->file('file')->getClientOriginalName();
-          //
-          //get filename without extension
-          $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-
-          //get file extension
-          $extension = $request->file('namespace')->getClientOriginalExtension();
-
-          //filename to store
-          $filenametostore = $filename.'_'.time().'.'.$extension;
-
-          //Upload File
-          $request->file('file')->storeAs('public/uploads', $filenametostore);
-
-          // //storeUrl
-          Photo::create(['url'=>$filenametostore , 'user_id'=>$auth]);
-        }
-
-        return $request->all();
     }
 }

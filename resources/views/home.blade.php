@@ -17,6 +17,8 @@
       <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
       <!-- Datatable -->
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+       {{-- user profile --}}
+      <link rel="stylesheet" href="{{asset('css/profile.css')}}">
       {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
       <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.bootstrap.min.css">
@@ -71,7 +73,7 @@
                      </ul>
                 </li>
                   <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
-                @role('doctor|Admin')
+              @can('write post|  edit post | view post')
                  <li>
                      <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Blogs</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">
@@ -92,8 +94,8 @@
 
                     </ul>
                   </li>
-                  @endrole
-                  @role('Admin')
+                @endcan
+                @can('write post|edit post|view post')
                   <li>
                     <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Department</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul class="iq-submenu">
@@ -101,7 +103,24 @@
 
                     </ul>
                   </li>
-                  @endrole
+                @endcan
+                @can('write post|edit post|view post')
+                  <li>
+                    <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Post_Type</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul class="iq-submenu">
+                      <li><a href="{{route('post_type.index') }}">Post Categories</a></li>
+                    </ul>
+                  </li>
+                @endcan
+                @can('write post')
+                  <li>
+                    <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Post</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul class="iq-submenu">
+                      <li><a href="{{route('post.index') }}">Post records</a></li>
+                      <li><a href="{{route('post.create') }}">Create Post</a></li>
+                    </ul>
+                  </li>
+                @endcan
                   @role('Admin')
                   <li class="iq-menu-title"><i class="ri-separator"></i><span>Install role</span></li>
                   <li>
@@ -405,10 +424,10 @@
                                  <a href="#" class="iq-sub-card iq-bg-primary-hover">
                                     <div class="media align-items-center">
                                        <div class="rounded iq-card-icon iq-bg-primary">
-                                          <i class="ri-file-user-line"></i>
+                                        <i class="ri-file-user-line"></i>
                                        </div>
                                        <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">My Profile</h6>
+                                          <a href="{{ route('profile.index')}} "><h6 class="mb-0 ">My Profile</h6></a>
                                           <p class="mb-0 font-size-12">View personal profile details.</p>
                                        </div>
                                     </div>
@@ -654,17 +673,6 @@
        <!-- DataTables -->
        <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
-             {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-             <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-             <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-             <script src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
-             <script src="https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js"></script>
-             <script src="{{asset('/js/dataTables.editor.js')}}"></script>
-
-             <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
-             <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
-
-             <script src="{{asset('/js/editor.bootstrap.min.js')}}"></script> --}}
     @stack('scripts')
    </body>
 </html>

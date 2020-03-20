@@ -7,6 +7,8 @@ use App\Health_topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Yajra\Datatables\Datatables;
+
 
 class BlogsController extends Controller
 {
@@ -18,8 +20,9 @@ class BlogsController extends Controller
     public function index()
     {
         //
-        $blogs = Blog::all();
-        return view('admin.blogs.index', ['blogs'=>$blogs]);
+        // $blogs = Blog::all();
+
+        return view('admin.blogs.index');
     }
 
     /**
@@ -140,4 +143,34 @@ class BlogsController extends Controller
 
        }
    }
+   public function datatable()
+   {
+       return Datatables::of(Blog::query())
+       ->addColumn('health_topic', function(Blog $blog) {
+                  return $blog->health_topic->topic;
+               })
+       ->addColumn('users', function(Blog $blog) {
+                          return $blog->user->name;
+                       })
+       ->addColumn('update', function(Blog $blog){
+             $update =  '<a href="/admin/add_blog/'.$blog->id.'/edit" class="btn btn-primary btn-sm">Update</a>';
+
+                return $update;
+       })
+       ->addColumn('action', function(Blog $blog){
+         $action = <<<HTML
+                    <form action="/admin/add_blog/delete/$blog->id" method="get">
+                     <input type="submit" class="btn btn-danger btn-sm" value="delete">
+                   </form>
+
+                   HTML;
+            return $action;
+       })
+
+       ->rawColumns(['update', 'action'])
+
+       ->make(true);
+   }
+
+
 }

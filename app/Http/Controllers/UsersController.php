@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\User;
-
+use App\Department;
+use App\Photo;
 use App\model_has_roles;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 use App\DataTables\UserDataTable;
 use App\DataTables\UserDataTableEditor;
+
 
 class UsersController extends Controller
 {
@@ -22,7 +25,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-      
+
       return view('admin.users.index');
      }
 
@@ -35,8 +38,8 @@ class UsersController extends Controller
     {
         //
         $roles = DB::table('roles')->pluck('name', 'id')->all();
-
-        return view('admin.users.create', ['roles'=>$roles]);
+        $departments = DB::table('departments')->pluck('name', 'id')->all();
+        return view('admin.users.create', ['roles'=>$roles, 'departments'=>$departments]);
     }
 
     /**
@@ -45,14 +48,47 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         //
+        $validated = $request->validated();
         $input = $request->all();
         $password = bcrypt($input['password']);
-        User::create(['name'=>$input['name'], 'email'=>$input['email'], 'password'=>$password]);
 
-        return view('home');
+        User::create([
+        'name'=>$input['name'],
+        'email'=>$input['email'],
+        'password'=> $password,
+        'description'=>$input['description'],
+        'department_id'=>$input['department_id'],
+        'role_id'=>$input['role_id'],
+        'facebook_url'=>$input['facebook_url'],
+        'insta_url'=>$input['insta_url']
+       ]);
+
+        if($request->hasFile('photo')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('photo')->getClientOriginalName();
+            //
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $request->file('photo')->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename.'_'.time().'.'.$extension;
+
+            //Upload File
+            $request->file('photo')->storeAs('public/uploads', $filenametostore);
+
+            $user = DB::table('users')->where('name', $input['name'])->value('id');
+            // //storeUrl
+            Photo::create(['url'=>$filenametostore, 'user_id'=>$user]);
+
+          }
+
+       return view('home');
     }
 
     /**
@@ -87,13 +123,23 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         //
         $input = $request->all();
+        $validated = $request->validated();
         $password = bcrypt($input['password']);
         $user = User::findOrFail($user->id);
-        $user->update(['name'=>$input['name'], 'email'=>$input['email'], 'password'=>$password]);
+        $user->update([
+        'name'=>$input['name'],
+        'email'=>$input['email'],
+        'password'=> $password,
+        'description'=>$input['description'],
+        'department_id'=>$input['department_id'],
+        'role_id'=>$input['role_id'],
+        'facebook_url'=>$input['facebook_url'],
+        'insta_url'=>$input['insta_url']
+       ]);
 
         return redirect('/admin/user');
     }
