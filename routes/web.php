@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function() {
   });
   Route::group(['middleware'=>['role:doctor|Admin']], function(){
      Route::resource('/admin/post_type', 'PostTypeController');
+     Route::resource('/admin/schedual', 'SchedualController');
   });
   Route::group(['middleware' => ['role:Admin']], function(){
      Route::resource('/admin/create_role', 'CreateRoleController');
@@ -52,9 +53,10 @@ Route::group(['middleware' => ['auth']], function() {
    Route::get('/admin/user/delete/{id}', 'UsersController@destroy');
    Route::resource('/admin/add_role', 'RoleController');
    Route::get('/admin/add_role/add/{id}', 'RoleController@addRole');
-   Route::get('admin/calendar', function(){
-     return view('calendar');
-   });
+   Route::resource('admin/calendar', 'CalendarController');
+   Route::get('calendar', 'CalendarController@load')->name('get.load');
+   Route::get('calendar', 'CalendarController@getDoctor')->name('get.doctor');
+   Route::post('/admin/calendar_store', 'CalendarController@store');
    Route::get('user', 'UsersController@datatable')->name('get.users');
    Route::resource('/admin/profile', 'ProfileController');
    Route::get('/upload', 'PhotoController@ajaxstore');
@@ -63,3 +65,7 @@ Route::group(['middleware' => ['auth']], function() {
    Route::get('post', 'PostController@datatable')->name('get.posts');
 });
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('test', function() {
+    return view('test');
+});

@@ -36,3 +36,17 @@
 </div>
 
 @endsection
+@push('scripts')
+<script>
+  $(document).ready(function(){
+      $("#roleID").change(function(){
+          var selectedRole = $(this).children("option:selected").val();
+          if(selectedRole != 2)
+          {
+           $("#department").prop('disabled', true);
+          }
+
+      });
+  });
+</script>
+@endpush

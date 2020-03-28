@@ -8,11 +8,11 @@
 </div>
 <div class="form-group">
   {!! Form::label('role_id', 'Role') !!}
-  {!! Form::select('role_id',[''=>'choose role'] + $roles, null, ['class'=>'form-control','value'=> '$roles->id']) !!}
+  {!! Form::select('role_id',[''=>'choose role'] + $roles, null, ['class'=>'form-control','value'=> '$roles->id', 'id'=>'roleID']) !!}
 </div>
 <div class="form-group">
   {!! Form::label('department_id', 'Department') !!}
-  {!! Form::select('department_id',[''=>'choose role'] + $departments, null, ['class'=>'form-control','value'=> '$roles->id']) !!}
+  {!! Form::select('department_id',[''=>'choose role'] + $departments, null, ['class'=>'form-control','value'=> '$roles->id', 'id'=>'department']) !!}
 </div>
 <div class="form-group">
   {!! Form::label('description', 'Description') !!}

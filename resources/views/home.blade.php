@@ -9,6 +9,7 @@
       <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" />
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
       <!-- Typography CSS -->
       <link rel="stylesheet" href="{{asset('css/typography.css')}}">
       <!-- Style CSS -->
@@ -19,11 +20,14 @@
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
        {{-- user profile --}}
       <link rel="stylesheet" href="{{asset('css/profile.css')}}">
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+      
+      {{-- <link href="{{asset('css/select2.css')}}"> --}}
       {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
       <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.bootstrap.min.css">
       <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.4/css/select.bootstrap.min.css"> --}}
-
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
    </head>
    <body>
       <!-- loader Start -->
@@ -73,7 +77,7 @@
                      </ul>
                 </li>
                   <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
-              @can('write post|  edit post | view post')
+              @can('write post')
                  <li>
                      <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Blogs</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul class="iq-submenu">
@@ -95,7 +99,7 @@
                     </ul>
                   </li>
                 @endcan
-                @can('write post|edit post|view post')
+                @can('write post')
                   <li>
                     <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Department</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul class="iq-submenu">
@@ -630,10 +634,13 @@
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 
-      </script>
+
       <script src="{{asset('js/jquery.min.js')}}"></script>
+
       <script src="{{asset('js/popper.min.js')}}"></script>
+
       <script src="{{asset('js/bootstrap.min.js')}}"></script>
+      <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
       <!-- Appear JavaScript -->
       <script src="{{asset('js/jquery.appear.js')}}"></script>
       <!-- Countdown JavaScript -->
@@ -657,19 +664,24 @@
       <script src="{{asset('js/smooth-scrollbar.js') }}"></script>
       <!-- lottie JavaScript -->
       <script src="{{asset('js/lottie.js') }}"></script>
-      <!-- Chart Custom JavaScript -->da
+      <!-- Chart Custom JavaScript -->
       <script src="{{asset('js/chart-custom.js') }}"></script>
       <!-- Custom JavaScript -->
       <script src="{{asset('js/custom.js') }}"></script>
 
+      {{-- <script type="text/javascript" src="{{asset('js/select2.full.js')}}"></script>
+      <script type="text/javascript" src="{{asset('js/select2.full.min.js')}}"></script>
+      <script type="text/javascript" src="{{asset('js/select2.js')}}"></script> --}}
+
 
       {{-- Datatable --}}
       <!-- jQuery -->
-       <script
-          src="https://code.jquery.com/jquery-3.4.1.min.js"
-          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-          crossorigin="anonymous">
-      </script>
+      <script
+         src="https://code.jquery.com/jquery-3.4.1.min.js"
+         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+         crossorigin="anonymous">
+     </script>
+
        <!-- DataTables -->
        <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 

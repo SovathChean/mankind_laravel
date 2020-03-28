@@ -3135,151 +3135,152 @@ if(jQuery('#chartdiv').length){
 
 
     // calender js
-    if(jQuery('#calendar').length){
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                plugins: ['dayGrid']
-            });
-            calendar.render();
-        });
-    }
+    // if(jQuery('#calendar').length){
+    //     document.addEventListener('DOMContentLoaded', function () {
+    //         var calendarEl = document.getElementById('calendar');
+    //         var calendar = new FullCalendar.Calendar(calendarEl, {
+    //             plugins: ['dayGrid']
+    //         });
+    //         calendar.render();
+    //     });
+    // }
 
-    // calender 1 js
-    if(jQuery('#calendar1').length){
-     document.addEventListener('DOMContentLoaded', function() {
-                 var calendarEl = document.getElementById('calendar1');
-
-                var calendar1 = new FullCalendar.Calendar(calendarEl, {
-                   plugins: [ 'timeGrid', 'dayGrid', 'list' ],
-                   timeZone: 'UTC',
-                   defaultView: 'dayGridMonth',
-                   header: {
-                      left: 'prev,next today',
-                      center: 'title',
-                      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                   },
-                   events: [
-                   {
-                      title: 'All Day Event',
-                      start: '2019-12-01',
-                      color: '#fc9919'
-                   },
-                   {
-                      title: 'Long Event',
-                      start: '2019-12-07',
-                      end: '2019-12-10',
-                      color: '#ffc107' // override!
-                   },
-                   {
-                      groupId: '999',
-                      title: 'Repeating Event',
-                      start: '2019-12-09T16:00:00',
-                      color: '#17a2b8'
-                   },
-                   {
-                      groupId: '999',
-                      title: 'Repeating Event',
-                      start: '2019-12-16T16:00:00',
-                      color: '#17a2b8'
-                   },
-                   {
-                      title: 'Conference',
-                      start: '2019-12-11',
-                      end: '2019-12-13',
-                      color: '#27e3f4' // override!
-                   },
-                   {
-                      title: 'Meeting',
-                      start: '2019-12-12T10:30:00',
-                      end: '2019-12-12T12:30:00',
-                      color: '#1c67a2'
-                   },
-                   {
-                      title: 'Lunch',
-                      start: '2019-12-12T12:00:00',
-                      color: '#777D74'
-                   },
-                   {
-                      title: 'Meeting',
-                      start: '2019-12-12T14:30:00',
-                      color: '#1c67a2'
-                   },
-                   {
-                      title: 'Birthday Party',
-                      start: '2019-12-28T07:00:00',
-                      color: '#28a745'
-                   },
-                   {
-                      title: 'Meeting',
-                      start: '2020-01-12T14:30:00',
-                      color: '#1c67a2'
-                   },
-                   {
-                      title: 'Birthday Party',
-                      start: '2020-01-02T07:00:00',
-                      color: '#28a745'
-                   },
-                   {
-                      title: 'Click for Google',
-                      url: 'http://google.com/',
-                      start: '2020-01-25'
-                   },
-                   {
-                      title: 'Birthday Party',
-                      start: '2020-01-13T07:00:00',
-                      color: '#28a745'
-                   },
-                   {
-                      title: 'Click for Google',
-                      url: 'http://google.com/',
-                      start: '2019-12-28'
-                   },
-                   {
-                      title: 'Meeting',
-                      start: '2020-01-12T14:30:00',
-                      color: '#1c67a2'
-                   },
-                   {
-                      title: 'Birthday Party',
-                      start: '2020-01-13T07:00:00',
-                      color: '#28a745'
-                   },
-                   {
-                      title: 'Click for Google',
-                      url: 'http://google.com/',
-                      start: '2020-01-28'
-                   },
-                   {
-                       title: 'All Day Event',
-                       start: '2020-02-01',
-                       color: '#fc9919'
-                   },
-                   {
-                       title: 'Long Event',
-                       start: '2020-02-07',
-                       end: '2020-02-10',
-                       color: '#ffc107' // override!
-                   },
-                   {
-                       groupId: '999',
-                       title: 'Repeating Event',
-                       start: '2020-02-09T16:00:00',
-                       color: '#17a2b8'
-                   },
-                   {
-                       groupId: '999',
-                       title: 'Repeating Event',
-                       start: '2020-02-16T16:00:00',
-                       color: '#17a2b8'
-                   }
-                ]
-                });
-
-
-                calendar1.render();
-             });
-    }
+    // // calender 1 js
+    // if(jQuery('#calendar1').length){
+    //  document.addEventListener('DOMContentLoaded', function() {
+    //              var calendarEl = document.getElementById('calendar1');
+    //
+    //             var calendar1 = new FullCalendar.Calendar(calendarEl, {
+    //                plugins: [ 'timeGrid', 'dayGrid', 'list' ],
+    //                timeZone: 'UTC',
+    //                defaultView: 'dayGridMonth',
+    //                header: {
+    //                   left: 'prev,next today',
+    //                   center: 'title',
+    //                   right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    //                },
+    //
+    //                events: [
+    //                {
+    //                   title: 'All Day Event',
+    //                   start: '2019-12-01',
+    //                   color: '#fc9919'
+    //                },
+    //                {
+    //                   title: 'Long Event',
+    //                   start: '2019-12-07',
+    //                   end: '2019-12-10',
+    //                   color: '#ffc107' // override!
+    //                },
+    //                {
+    //                   groupId: '999',
+    //                   title: 'Repeating Event',
+    //                   start: '2019-12-09T16:00:00',
+    //                   color: '#17a2b8'
+    //                },
+    //                {
+    //                   groupId: '999',
+    //                   title: 'Repeating Event',
+    //                   start: '2019-12-16T16:00:00',
+    //                   color: '#17a2b8'
+    //                },
+    //                {
+    //                   title: 'Conference',
+    //                   start: '2019-12-11',
+    //                   end: '2019-12-13',
+    //                   color: '#27e3f4' // override!
+    //                },
+    //                {
+    //                   title: 'Meeting',
+    //                   start: '2019-12-12T10:30:00',
+    //                   end: '2019-12-12T12:30:00',
+    //                   color: '#1c67a2'
+    //                },
+    //                {
+    //                   title: 'Lunch',
+    //                   start: '2019-12-12T12:00:00',
+    //                   color: '#777D74'
+    //                },
+    //                {
+    //                   title: 'Meeting',
+    //                   start: '2019-12-12T14:30:00',
+    //                   color: '#1c67a2'
+    //                },
+    //                {
+    //                   title: 'Birthday Party',
+    //                   start: '2019-12-28T07:00:00',
+    //                   color: '#28a745'
+    //                },
+    //                {
+    //                   title: 'Meeting',
+    //                   start: '2020-01-12T14:30:00',
+    //                   color: '#1c67a2'
+    //                },
+    //                {
+    //                   title: 'Birthday Party',
+    //                   start: '2020-01-02T07:00:00',
+    //                   color: '#28a745'
+    //                },
+    //                {
+    //                   title: 'Click for Google',
+    //                   url: 'http://google.com/',
+    //                   start: '2020-01-25'
+    //                },
+    //                {
+    //                   title: 'Birthday Party',
+    //                   start: '2020-01-13T07:00:00',
+    //                   color: '#28a745'
+    //                },
+    //                {
+    //                   title: 'Click for Google',
+    //                   url: 'http://google.com/',
+    //                   start: '2019-12-28'
+    //                },
+    //                {
+    //                   title: 'Meeting',
+    //                   start: '2020-01-12T14:30:00',
+    //                   color: '#1c67a2'
+    //                },
+    //                {
+    //                   title: 'Birthday Party',
+    //                   start: '2020-01-13T07:00:00',
+    //                   color: '#28a745'
+    //                },
+    //                {
+    //                   title: 'Click for Google',
+    //                   url: 'http://google.com/',
+    //                   start: '2020-01-28'
+    //                },
+    //                {
+    //                    title: 'All Day Event',
+    //                    start: '2020-02-01',
+    //                    color: '#fc9919'
+    //                },
+    //                {
+    //                    title: 'Long Event',
+    //                    start: '2020-02-07',
+    //                    end: '2020-02-10',
+    //                    color: '#ffc107' // override!
+    //                },
+    //                {
+    //                    groupId: '999',
+    //                    title: 'Repeating Event',
+    //                    start: '2020-02-09T16:00:00',
+    //                    color: '#17a2b8'
+    //                },
+    //                {
+    //                    groupId: '999',
+    //                    title: 'Repeating Event',
+    //                    start: '2020-02-16T16:00:00',
+    //                    color: '#17a2b8'
+    //                }
+    //             ]
+    //             });
+    //
+    //
+    //             calendar1.render();
+    //          });
+    // }
 
     // Chart Apex js
     if(jQuery('#apex-basic').length){
@@ -3346,7 +3347,7 @@ if(jQuery('#chartdiv').length){
 
             xaxis: {
                 type: 'datetime',
-                categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"],                
+                categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"],
             },
             tooltip: {
                 x: {
@@ -3388,7 +3389,7 @@ if(jQuery('#chartdiv').length){
             document.querySelector("#apex-bar"),
             options
         );
-        
+
         chart.render();
     }
     if(jQuery('#apex-column').length){
@@ -3401,7 +3402,7 @@ if(jQuery('#chartdiv').length){
                 bar: {
                     horizontal: false,
                     columnWidth: '55%',
-                    endingShape: 'rounded'   
+                    endingShape: 'rounded'
                 },
             },
             dataLabels: {
@@ -3512,7 +3513,7 @@ if(jQuery('#chartdiv').length){
               return  y.toFixed(0) + " views";
             }
             return y;
-            
+
           }
         }
       },
@@ -3879,7 +3880,7 @@ if(jQuery('#chartdiv').length){
                     type: 'xy'
                 }
             },
-            
+
             series: [{
                 name: "SAMPLE A",
                 data: [
@@ -3910,7 +3911,7 @@ if(jQuery('#chartdiv').length){
             document.querySelector("#apex-scatter-chart"),
             options
         );
-        
+
         chart.render();
     }
     if(jQuery('#apex-radialbar-chart').length){
@@ -3942,14 +3943,14 @@ if(jQuery('#chartdiv').length){
             series: [44, 55, 67, 83],
             labels: ['Apples', 'Oranges', 'Bananas', 'Berries'],
             colors: ['#1c67a2', '#1c67a2', '#1c67a2', '#1c67a2'],
-            
+
         }
 
        var chart = new ApexCharts(
             document.querySelector("#apex-radialbar-chart"),
             options
         );
-        
+
         chart.render();
     }
     if(jQuery('#apex-pie-chart').length){
@@ -3982,7 +3983,7 @@ if(jQuery('#chartdiv').length){
         chart.render();
     }
 
-    // Am Charts 
+    // Am Charts
 
      if(jQuery('#am-simple-chart').length){
         am4core.ready(function() {
@@ -4188,26 +4189,26 @@ if(jQuery('#chartdiv').length){
 
         // Create series
         function createSeries(field, name) {
-          
+
           // Set up series
           var series = chart.series.push(new am4charts.ColumnSeries());
           series.name = name;
           series.dataFields.valueY = field;
           series.dataFields.categoryX = "year";
           series.sequencedInterpolation = true;
-          
+
           // Make it stacked
           series.stacked = true;
-          
+
           // Configure columns
           series.columns.template.width = am4core.percent(60);
           series.columns.template.tooltipText = "[bold]{name}[/]\n[font-size:14px]{categoryX}: {valueY}";
-          
+
           // Add label
           var labelBullet = series.bullets.push(new am4charts.LabelBullet());
           labelBullet.label.text = "{valueY}";
           labelBullet.locationY = 0.5;
-          
+
           return series;
         }
 
@@ -4979,7 +4980,7 @@ if(jQuery('#chartdiv').length){
             for (var i = 0; i < 500; i++) {
                 var newDate = new Date(firstDate);
                 newDate.setDate(newDate.getDate() + i);
-                
+
                 visits += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
 
                 chartData.push({
@@ -4990,7 +4991,7 @@ if(jQuery('#chartdiv').length){
             return chartData;
         }
 
-        }); 
+        });
      }
 
      if(jQuery('#am-zoomable-chart').length){
@@ -6881,5 +6882,3 @@ if(jQuery('#chartdiv').length){
         }]
     });
     }
-
-     
