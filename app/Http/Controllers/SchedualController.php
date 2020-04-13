@@ -18,14 +18,10 @@ class SchedualController extends Controller
     public function index()
     {
         //
-        $id = Auth::id();
-        $user = User::findOrFail($id);
-        $schedual = Schedual::where('user_id', 1)->get();
-
-        return view('admin.schedual.index', ['schedual'=>$schedual]);
+       $scheduals = Schedual::all()->where('user_id', Auth::id());
 
 
-
+      return view('admin.schedual.index', ['scheduals'=>$scheduals]);
     }
 
     /**
@@ -36,6 +32,10 @@ class SchedualController extends Controller
     public function create()
     {
         //
+        $days = [
+        'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
+        ];
+        return view('admin.schedual.create', ['days'=>$days]);
     }
 
     /**
@@ -47,6 +47,49 @@ class SchedualController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->input();
+        $auth = Auth::id();
+
+        Schedual::create([
+          "user_id"=>$auth,
+          "start"=>$input['StartMonday'],
+          "end"=>$input['EndMonday'],
+          'wod'=>"Monday",
+        ]);
+        Schedual::create([
+          "user_id"=>$auth,
+          "start"=>$input['StartTuesday'],
+          "end"=>$input['EndTuesday'],
+          'wod'=>"Tuesday",
+        ]);
+        Schedual::create([
+          "user_id"=>$auth,
+          "start"=>$input['StartWednesday'],
+          "end"=>$input['EndWednesday'],
+          'wod'=>"Wednesday",
+        ]);
+        Schedual::create([
+          "user_id"=>$auth,
+          "start"=>$input['StartThursday'],
+          "end"=>$input['EndThursday'],
+          'wod'=>"Thursday",
+        ]);
+        Schedual::create([
+          "user_id"=>$auth,
+          "start"=>$input['StartFriday'],
+          "end"=>$input['EndFriday'],
+          'wod'=>"Friday",
+        ]);
+        Schedual::create([
+          "user_id"=>$auth,
+          "start"=>$input['StartSaturday'],
+          "end"=>$input['EndSaturday'],
+          'wod'=>"Saturday",
+        ]);
+
+
+
+         return $view('admin.schedual.index');
     }
 
     /**

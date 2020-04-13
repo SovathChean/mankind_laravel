@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Health_topics;
+use App\Health_topic;
 
 class healthTopicSeed extends Seeder
 {
@@ -23,7 +23,7 @@ class healthTopicSeed extends Seeder
 
         foreach($health as $h)
         {
-          Health_topics::create(['topic'=>$h]);
+          Health_topic::create(['topic'=>$h]);
         }
     }
 }

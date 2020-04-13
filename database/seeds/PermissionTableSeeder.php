@@ -17,6 +17,7 @@ class PermissionTableSeeder extends Seeder
            'edit post',
            'write post',
            'view post',
+           'delete post',
         ];
 
         foreach ($permissions as $permission) {

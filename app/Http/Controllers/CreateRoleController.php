@@ -24,7 +24,7 @@ class CreateRoleController extends Controller
 
         $roles = DB::table('roles')->get();
 
-        $permissions = DB::table('permissions')->pluck('name', 'id')->all();
+        $permissions = DB::table('permissions')->get();
 
 
 

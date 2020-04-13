@@ -11,4 +11,9 @@ class Schedual extends Model
       'user_id', 'start', 'end', 'wod', 'time_id',
     ];
 
+    protected $casts = [
+      'start'=> 'array',
+      'end' => 'array',
+    ];
+
 }

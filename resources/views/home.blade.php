@@ -21,7 +21,7 @@
        {{-- user profile --}}
       <link rel="stylesheet" href="{{asset('css/profile.css')}}">
       <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-      
+
       {{-- <link href="{{asset('css/select2.css')}}"> --}}
       {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
@@ -125,6 +125,17 @@
                     </ul>
                   </li>
                 @endcan
+                @role('Admin|Doctor')
+                  <li>
+                    <a href="javascript:void(0);" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Schedual</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul class="iq-submenu">
+                      <li><a href="{{route('schedual.index') }}">Show Schedual</a></li>
+                      <li><a href="{{route('schedual.create') }}">Create Schedual</a></li>
+                    </ul>
+                  </li>
+                @endrole
+
+
                   @role('Admin')
                   <li class="iq-menu-title"><i class="ri-separator"></i><span>Install role</span></li>
                   <li>
