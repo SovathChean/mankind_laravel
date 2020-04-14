@@ -19,16 +19,39 @@
       @foreach($scheduals as $schedual)
       <tr>
         <td>{{$schedual->wod}}</td>
-
-             {{-- @for($i = 0; $i<count($schedual->start); ++$i)
-               @if(!is_null($schedual->start[$i]))
-               <td>   {{$schedual->start[$i]}} </td>
+        <td>
+          @if(!is_null($schedual->start[0]))
+             @if(!is_null($schedual->end[0]))
+             {{$schedual->start[0]}}-{{$schedual->end[0]}}
+           @else
+            Not-available
+              @endif
+        @else
+           Not-available
+         @endif
+        </td>
+        <td>
+          @if(!is_null($schedual->start[1]))
+            @if(!is_null($schedual->end[1]))
+            {{$schedual->start[1]}}-{{$schedual->end[1]}}
+          @else
+           Not-available
+             @endif
+        @else
+           Not-available
+         @endif
+        </td>
+        <td>
+            @if(!is_null($schedual->start[2]))
+              @if(!is_null($schedual->end[2]))
+              {{$schedual->start[2]}}-{{$schedual->end[2]}}
                @else
-                 <td>Not available</td>
+                Not-available
                @endif
-             @endfor --}}
-
-
+           @else
+           Not-available
+           @endif
+        </td>
       </tr>
     @endforeach
     </tbody>

@@ -35,7 +35,8 @@ class SchedualController extends Controller
         $days = [
         'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
         ];
-        return view('admin.schedual.create', ['days'=>$days]);
+        $error = null;
+        return view('admin.schedual.create', ['days'=>$days, 'error'=>$error]);
     }
 
     /**
@@ -49,47 +50,60 @@ class SchedualController extends Controller
         //
         $input = $request->input();
         $auth = Auth::id();
+        $getId = Schedual::where('user_id', $auth)->get('id');
+        if(is_null($getId))
+        {
 
-        Schedual::create([
-          "user_id"=>$auth,
-          "start"=>$input['StartMonday'],
-          "end"=>$input['EndMonday'],
-          'wod'=>"Monday",
-        ]);
-        Schedual::create([
-          "user_id"=>$auth,
-          "start"=>$input['StartTuesday'],
-          "end"=>$input['EndTuesday'],
-          'wod'=>"Tuesday",
-        ]);
-        Schedual::create([
-          "user_id"=>$auth,
-          "start"=>$input['StartWednesday'],
-          "end"=>$input['EndWednesday'],
-          'wod'=>"Wednesday",
-        ]);
-        Schedual::create([
-          "user_id"=>$auth,
-          "start"=>$input['StartThursday'],
-          "end"=>$input['EndThursday'],
-          'wod'=>"Thursday",
-        ]);
-        Schedual::create([
-          "user_id"=>$auth,
-          "start"=>$input['StartFriday'],
-          "end"=>$input['EndFriday'],
-          'wod'=>"Friday",
-        ]);
-        Schedual::create([
-          "user_id"=>$auth,
-          "start"=>$input['StartSaturday'],
-          "end"=>$input['EndSaturday'],
-          'wod'=>"Saturday",
-        ]);
+          Schedual::create([
+            "user_id"=>$auth,
+            "start"=>$input['StartMonday'],
+            "end"=>$input['EndMonday'],
+            'wod'=>"Monday",
+          ]);
+          Schedual::create([
+            "user_id"=>$auth,
+            "start"=>$input['StartTuesday'],
+            "end"=>$input['EndTuesday'],
+            'wod'=>"Tuesday",
+          ]);
+          Schedual::create([
+            "user_id"=>$auth,
+            "start"=>$input['StartWednesday'],
+            "end"=>$input['EndWednesday'],
+            'wod'=>"Wednesday",
+          ]);
+          Schedual::create([
+            "user_id"=>$auth,
+            "start"=>$input['StartThursday'],
+            "end"=>$input['EndThursday'],
+            'wod'=>"Thursday",
+          ]);
+          Schedual::create([
+            "user_id"=>$auth,
+            "start"=>$input['StartFriday'],
+            "end"=>$input['EndFriday'],
+            'wod'=>"Friday",
+          ]);
+          Schedual::create([
+            "user_id"=>$auth,
+            "start"=>$input['StartSaturday'],
+            "end"=>$input['EndSaturday'],
+            'wod'=>"Saturday",
+          ]);
+
+        }
+        else {
+          $days = [
+          'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
+          ];
+          $error = "User already exist, you can create more schedual";
+          return view('admin.schedual.create', ['days'=>$days, 'error'=>$error]);
+
+         }
+        //
 
 
 
-         return $view('admin.schedual.index');
     }
 
     /**

@@ -131,6 +131,7 @@
                     <ul class="iq-submenu">
                       <li><a href="{{route('schedual.index') }}">Show Schedual</a></li>
                       <li><a href="{{route('schedual.create') }}">Create Schedual</a></li>
+
                     </ul>
                   </li>
                 @endrole

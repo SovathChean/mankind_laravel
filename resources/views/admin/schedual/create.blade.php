@@ -2,6 +2,11 @@
 
 @section('contents')
 <div class="container-fluid">
+  @if(!is_null($error))
+   <div class="alert alert-warning" role="alert">
+        {{$error}}
+    </div>
+  @endif
   <div class="row">
     <div class="col-sm-12 col-lg-12">
       <div class="iq-card-header">
